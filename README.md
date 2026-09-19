@@ -16,7 +16,7 @@ Run the smoke test while the server is running:
 npm test
 ```
 
-The app uses a dependency-free Node server and stores the starter database in `data.json`. The browser interface also keeps a local copy for offline-friendly use and supports CSV imports plus JSON backup/restore from **Users & access**.
+The app uses a Node server and stores data in `data.json` by default, or PostgreSQL when `DATABASE_URL` is configured. The browser interface also keeps a local copy for offline-friendly use and supports CSV imports plus JSON backup/restore from **Users & access**.
 
 ## Included modules
 
@@ -40,6 +40,9 @@ The app uses a dependency-free Node server and stores the starter database in `d
 - `POST /api/auth/login`
 - `GET /api/auth/me`
 - `POST /api/auth/logout`
+- `GET /api/auth/users` (administrator only)
+- `POST /api/auth/users` (administrator only)
+- `POST /api/notifications/test` (administrator only)
 
 For a production deployment, replace the JSON store with PostgreSQL or MySQL, store secrets in environment variables, use HTTPS, add rate limiting, and use a managed email/SMS provider.
 
@@ -50,15 +53,20 @@ docker build -t mahanaim-academy .
 docker run --rm -p 4173:4173 -e DEMO_ADMIN_PASSWORD='change-this-password' mahanaim-academy
 ```
 
+## Deploy on Koyeb
+
+See `KOYEB_DEPLOY.md`. Koyeb can deploy this Node application from the existing GitHub repository, while Neon or Supabase can provide PostgreSQL storage.
+
 ## Deploy on Render
 
 1. Create a new **Web Service** on Render and connect the GitHub repository containing this project, or upload the project through your preferred repository workflow.
 2. Render can use `render.yaml` to configure the service automatically.
 3. Set `DEMO_ADMIN_PASSWORD` in the Render Environment settings to a strong private password.
-4. Keep the included persistent disk mounted at `/var/data`; the server stores `data.json` there.
-5. Deploy and confirm the health URL: `/api/health`.
+4. For PostgreSQL, set `DATABASE_URL` and `DATABASE_SSL=true` in Render Environment settings.
+5. For messaging, set `SMS_PROVIDER_URL`, `SMS_PROVIDER_TOKEN`, `EMAIL_API_URL`, `EMAIL_API_TOKEN` and `SCHOOL_FROM_EMAIL`.
+6. Deploy and confirm the health URL: `/api/health`.
 
-The included Render configuration uses a Starter web service because persistent disks are required to keep school records after redeploys. If you use a free preview service, treat the JSON data as temporary.
+The included `render.yaml` uses Render's Free web service for a no-payment preview. Free services sleep after inactivity and their local data is temporary. For persistent school records, use `render-production.yaml`, which attaches a paid persistent disk.
 
 ## Demo administrator sign-in
 

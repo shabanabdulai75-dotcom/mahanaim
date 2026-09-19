@@ -2,13 +2,15 @@ services:
   - type: web
     name: mahanaim-academy
     runtime: node
-    plan: free
+    plan: starter
     buildCommand: npm install
     startCommand: npm start
     healthCheckPath: /api/health
     envVars:
       - key: NODE_ENV
         value: production
+      - key: DATA_DIR
+        value: /var/data
       - key: DEMO_ADMIN_PASSWORD
         sync: false
       - key: DATABASE_URL
@@ -25,3 +27,7 @@ services:
         sync: false
       - key: SCHOOL_FROM_EMAIL
         sync: false
+    disk:
+      name: mahanaim-academy-data
+      mountPath: /var/data
+      sizeGB: 1

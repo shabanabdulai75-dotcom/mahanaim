@@ -7,6 +7,9 @@
     "start": "node server.js",
     "test": "node smoke-test.js"
   },
+  "dependencies": {
+    "pg": "^8.12.0"
+  },
   "engines": {
     "node": ">=18"
   }
