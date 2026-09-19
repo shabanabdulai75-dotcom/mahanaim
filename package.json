@@ -1,0 +1,13 @@
+{
+  "name": "mahanaim-academy-school-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mahanaim Academy school management system",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node smoke-test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
