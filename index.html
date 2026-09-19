@@ -31,13 +31,16 @@
     button, input, select, textarea { font: inherit; }
     button { cursor: pointer; }
     .app-shell { display: flex; min-height: 100vh; }
-    .sidebar { width: var(--sidebar); background: var(--forest); color: #dcebe4; padding: 24px 16px 18px; display: flex; flex-direction: column; position: fixed; inset: 0 auto 0 0; z-index: 10; }
+    .sidebar { width: var(--sidebar); background: var(--forest); color: #dcebe4; padding: 24px 16px 18px; display: flex; flex-direction: column; position: fixed; inset: 0 auto 0 0; z-index: 10; overflow-y: auto; overflow-x: hidden; }
     .brand { display: flex; align-items: center; gap: 11px; padding: 0 9px 25px; border-bottom: 1px solid rgba(255,255,255,.11); }
     .crest { width: 43px; height: 43px; display: grid; place-items: center; position: relative; overflow: hidden; border-radius: 50%; background: #000; flex: 0 0 43px; }
     .school-logo { width: 100%; height: 100%; object-fit: cover; display: block; }
     .crest:before, .crest:after, .crest span { display: none; }
     .brand strong { display: block; color: #fff; letter-spacing: .02em; font-size: 15px; line-height: 1.15; }
     .brand small { color: #a9c3b7; font-size: 9px; text-transform: uppercase; letter-spacing: .12em; }
+    .sidebar::-webkit-scrollbar { width: 7px; }
+    .sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,.22); border-radius: 20px; }
+    .sidebar::-webkit-scrollbar-track { background: transparent; }
     .school-badge { margin: 18px 8px 16px; padding: 12px; background: rgba(255,255,255,.07); border-radius: 10px; color: #d0e5dc; font-size: 11px; line-height: 1.55; }
     .school-badge b { color: #fff; font-weight: 650; display: block; font-size: 12px; }
     .nav-label { color: #86a99a; font-size: 10px; text-transform: uppercase; letter-spacing: .13em; margin: 14px 10px 8px; font-weight: 700; }
@@ -46,7 +49,7 @@
     .nav button:hover { background: rgba(255,255,255,.08); color: #fff; }
     .nav button.active { background: var(--gold); color: var(--forest); font-weight: 700; box-shadow: 0 6px 14px rgba(229,173,77,.15); }
     .nav svg { width: 17px; height: 17px; flex: 0 0 17px; }
-    .sidebar-spacer { flex: 1; }
+    .sidebar-spacer { flex: 1; min-height: 18px; }
     .support-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.09); border-radius: 12px; padding: 13px; margin: 12px 4px; }
     .support-card .support-icon { width: 28px; height: 28px; display: grid; place-items: center; background: rgba(229,173,77,.16); border-radius: 8px; color: var(--gold); margin-bottom: 9px; }
     .support-card strong { color: #fff; font-size: 12px; display: block; margin-bottom: 4px; }
