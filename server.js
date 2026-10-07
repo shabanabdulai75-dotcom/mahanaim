@@ -19,7 +19,7 @@ function send(res, status, body, type='application/json', extra={}) {
 }
 function parseCookies(req) { return Object.fromEntries((req.headers.cookie || '').split(';').filter(Boolean).map(item => { const [k,...v]=item.trim().split('='); return [k, decodeURIComponent(v.join('='))]; })); }
 function readBody(req) { return new Promise((resolve,reject) => { let raw=''; req.on('data',chunk=>raw+=chunk); req.on('end',()=>{ try { resolve(JSON.parse(raw||'{}')); } catch (e) { reject(e); } }); req.on('error',reject); }); }
-function mime(file) { return { '.html':'text/html; charset=utf-8', '.js':'text/javascript', '.css':'text/css', '.png':'image/png', '.jpg':'image/jpeg', '.svg':'image/svg+xml', '.json':'application/json' }[path.extname(file)] || 'application/octet-stream'; }
+function mime(file) { return { '.html':'text/html; charset=utf-8', '.js':'text/javascript', '.css':'text/css', '.png':'image/png', '.jpg':'image/jpeg', '.svg':'image/svg+xml', '.json':'application/json', '.txt':'text/plain; charset=utf-8', '.xml':'application/xml; charset=utf-8' }[path.extname(file)] || 'application/octet-stream'; }
 function publicUser(user) { const { passwordHash, ...safe } = user; return safe; }
 function currentUser(req) { const token=parseCookies(req).mahanaim_session; return token ? sessions.get(token) : null; }
 async function allUsers() {
